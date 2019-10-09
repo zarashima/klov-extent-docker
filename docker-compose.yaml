@@ -1,0 +1,22 @@
+version: '3'
+services:
+  klov:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: klov:v0.2.5
+    ports:
+      - 80:80
+    links:
+      - mongodb:mongodb
+    volumes:
+      - ./data/klov:/sde/klov-0.2.5/upload/reports
+    restart: always
+
+  mongodb:
+    image: mongo:3.2
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongodb:/data/db
+    restart: always
